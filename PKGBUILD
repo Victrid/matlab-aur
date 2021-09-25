@@ -118,12 +118,12 @@ products=(
 instdir="/usr/lib/${pkgbase}"
 
 pkgver() {
-  cat "${srcdir}/${pkgbase}/VersionInfo.xml" | grep "<version>" | sed "s|\s*<version>\(.*\)</version>\s*|\1|g"
+  grep "<version>" "${srcdir}/${pkgbase}/VersionInfo.xml" | sed "s|\s*<version>\(.*\)</version>\s*|\1|g"
 }
 
 prepare() {
   # Extract file installation key
-  release=$(cat "${srcdir}/${pkgbase}/VersionInfo.xml" | grep "<release>" | sed "s|\s*<release>\(.*\)</release>\s*|\1|g")
+  release=$(grep "<release>" "${srcdir}/${pkgbase}/VersionInfo.xml" | sed "s|\s*<release>\(.*\)</release>\s*|\1|g")
   
   msg2 "Release from tarball: ${release}"
   
